@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "esnext",
+      "dom.iterable",
+      "dom"
+    ],
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "removeComments": false,
+    "downlevelIteration": true,
+    "incremental": true,
+    "target": "es5",
+    "module": "esnext",
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "emitDeclarationOnly": true,
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "jsx": "react-jsx",
+    "outDir": "./dist",
+    "resolveJsonModule": true,
+    "types": [
+      "./types"
+    ],
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "noEmit": true
+  },
+  "include": [
+    "src",
+    "setup-tests.ts"
+  ]
+}
