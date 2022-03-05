@@ -1,4 +1,4 @@
-export type MovieConfig = {
+export type MovieDTO = {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];
@@ -15,7 +15,7 @@ export type MovieConfig = {
   vote_count: number;
 };
 
-export const fetchMovies = async (): Promise<MovieConfig[]> => {
+export const fetchMovies = async (): Promise<MovieDTO[]> => {
   const response = await fetch('./movies.json');
   return response.json();
 };

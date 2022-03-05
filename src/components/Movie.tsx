@@ -2,6 +2,15 @@ import { FC } from 'react';
 
 import styles from '../styles.module.css';
 
+const getGenresText = (genres: string[]) => {
+  /**
+   * clone array so that I don't mutate the original
+   * */
+  const currentGenres = [...genres];
+  const lastGenre = currentGenres.pop();
+  return `${currentGenres.join(', ')} and ${lastGenre}`;
+}
+
 type MovieProps = {
   title: string;
   description: string;
@@ -19,9 +28,7 @@ const Movie: FC<MovieProps> = ({
   popularity,
   genres,
 }) => {
-  const currentGenres = [...genres];
-  const lastGenre = currentGenres.pop();
-  const genresText = `${currentGenres.join(', ')} and ${lastGenre}`;
+  const genresText = getGenresText(genres)
 
   return (
     <div className={styles.movie}>

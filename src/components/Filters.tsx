@@ -8,7 +8,7 @@ type FilterProps = {
   handleChange: (genre: string, selected: boolean) => void;
 };
 
-const Filter: FC<FilterProps> = ({ genre, selected, handleChange }) => {
+const GenreCheckbox: FC<FilterProps> = ({ genre, selected, handleChange }) => {
   return (
     <div className={styles.filter}>
       <div>{genre}</div>
@@ -38,7 +38,18 @@ const Filters: FC<FiltersProps> = ({
   rating,
   updateRating,
 }) => {
-  const handleCheckBoxChange = useCallback(
+  /**
+   * apply only the new value of the checked genre
+   *
+   * this callback is only created once because it has no dependencies
+   * this is a nice little optimization.
+   *
+   * 'updateSelectedGenres' is not a dependency that can be updated, react knows this.
+   *
+   * to deal with unnecessarily passing in the 'selectedGenres' every time it
+   * is updated, I can just use the current state of the 'selectedGenres'
+   * */
+  const handleCheckboxChange = useCallback(
     (genre: string, selected: boolean) => {
       updateSelectedGenres((currentGenres) => {
         return { ...currentGenres, [genre]: selected };
@@ -47,10 +58,16 @@ const Filters: FC<FiltersProps> = ({
     []
   );
 
+  /**
+   * apply the new filtered rating
+   * */
   const handleRatingChange = useCallback((e) => {
     updateRating(+e.target.value);
   }, []);
 
+  /**
+   * reset all filtered genres and rating
+   * */
   const handleReset = useCallback(() => {
     updateSelectedGenres((currentGenres) => {
       return Object.keys(currentGenres).reduce(
@@ -66,11 +83,11 @@ const Filters: FC<FiltersProps> = ({
     <>
       <div className={styles.filters}>
         {Object.entries(genres).map(([genre, selected], index) => (
-          <Filter
+          <GenreCheckbox
             genre={genre}
             selected={selected}
             key={index}
-            handleChange={handleCheckBoxChange}
+            handleChange={handleCheckboxChange}
           />
         ))}
       </div>
